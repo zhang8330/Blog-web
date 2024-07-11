@@ -1,0 +1,52 @@
+import axios from "./config/axiosDefaultConfig";
+import defaultConfig from "@/config/configDefault";
+
+class blogService {
+    async createBlog(blogData){
+        return axios.post(`${defaultConfig.baseApiUrl}/blog/create`,blogData);
+    }
+    async getPublicBlog(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getPublicBlog`,{
+            params: args
+        });
+    }
+    async getBlogById(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getBlogDetailById`,{
+            params: args
+        });
+    }
+    async createBlogComment(data){
+        return axios.post(`${defaultConfig.baseApiUrl}/blog/comment/create`,data);
+    }
+    async getMyBlog(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getMyBlog`,{
+            params: args
+        });
+    }
+    async getMyLikeBlog(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getMyLikeBlog`,{
+            params: args
+        });
+    }
+    async getUnapprovedBlog(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getUnapprovedBlog`,{
+            params: args
+        });
+    }
+    async getAllBlog(args){
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getAllBlog`,{
+            params: args
+        });
+    }
+    async approvedBlog(data){
+        return axios.post(`${defaultConfig.baseApiUrl}/blog/approvedBlog`,data);
+    }
+    async deleteBlog(data){
+        return axios.post(`${defaultConfig.baseApiUrl}/blog/deleteBlog`,data);
+    }
+    async getBlogInfo() {
+        return axios.get(`${defaultConfig.baseApiUrl}/blog/getBlogInfo`);
+    }
+ }
+
+export default new blogService();
