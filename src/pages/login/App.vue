@@ -1,12 +1,17 @@
 <template>
   <div :style="loginBgStyle">
+    <div id="slideFix">
+      <el-tooltip class="item" effect="dark" content="访问作者" placement="left">
+        <span class="iconfont icon-github" @click="toMyGitHub"></span>
+      </el-tooltip>
+    </div>
     <el-row
         :gutter="10"
-        style="width: 100%;height: 100%;margin:10px auto;"
+        style="width: 100%;height: 100%;"
     >
       <el-col :span="10">
-        <div class="loginWrapper" v-if="isLogin">
-          <h1 style="text-align: center;">登录</h1>
+        <div class="loginWrapper" v-show="isLogin">
+          <h1 style="text-align: center;margin-bottom: 60px">登录</h1>
 
           <el-form ref="loginForm" :model="loginForm" label-width="100px" :rules="rules">
             <el-form-item label="用户名" prop="userName">
@@ -16,8 +21,8 @@
               <el-input v-model="loginForm.passWord" placeholder="请输入密码" type="password"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
-              <el-button type="warning" @click="resetForm('loginForm')">重置</el-button>
+              <el-button class="confirmButton" type="primary" @click="submitForm('loginForm')">提交</el-button>
+              <el-button class="confirmButton" type="warning" @click="resetForm('loginForm')">重置</el-button>
             </el-form-item>
 
           </el-form>
@@ -26,8 +31,8 @@
             <el-button type="primary" @click="changeStatus">注册</el-button>
           </div>
         </div>
-        <div class="registerWrapper" v-else>
-          <h1 style="text-align: center;">注册</h1>
+        <div class="registerWrapper" v-show="!isLogin">
+          <h1 style="text-align: center;margin-bottom: 60px;">注册</h1>
           <el-form ref="registerForm" :model="registerForm" label-width="100px" :rules="rules">
             <el-form-item label="头像" prop="myAvatar">
               <el-upload
@@ -51,8 +56,8 @@
               <el-input v-model="registerForm.confirmPassword" placeholder="请再次输入密码" type="password"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('registerForm')">提交</el-button>
-              <el-button type="warning" @click="resetForm('registerForm')">重置</el-button>
+              <el-button class="confirmButton" type="primary" @click="submitForm('registerForm')">提交</el-button>
+              <el-button class="confirmButton" type="warning" @click="resetForm('registerForm')">重置</el-button>
             </el-form-item>
           </el-form>
           <div style="text-align: right">你可以选择
@@ -195,6 +200,9 @@ export default {
     handleAvatarSuccess(rs) {
       console.log('头像上传成功', rs.data.imgList[0]);
       this.registerForm.myAvatar = rs.data.imgList[0];
+    },
+    toMyGitHub(){
+      window.open("https://github.com/zhang8330");
     }
 
   }
@@ -202,12 +210,40 @@ export default {
 </script>
 
 <style>
-body {
+* {
   margin: 0;
+  padding: 0;
+  border: 0;
 }
 .loginWrapper, .registerWrapper {
   width: 80%;
-  margin: auto;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.9),
+      rgba(240, 248, 255, 0.9));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+span.icon-github{
+  font-size:32px;
+}
+.iconfont{
+  cursor: pointer;
+}
+#slideFix{
+  position:fixed;
+  top:40%;
+  right:0;
+  width:40px;
+  height:200px;
+  text-align: center;
+  background-color: rgba(230, 232, 238, 0.5);
+  z-index: 10;
+}
+.el-button.confirmButton{
+  margin-left: 20px;
 }
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
