@@ -1,7 +1,5 @@
 <template>
-  <div
-      style="width: 100%; height:100%;"
-  >
+  <div :style="loginBgStyle">
     <el-row
         :gutter="10"
         style="width: 100%;height: 100%;margin:10px auto;"
@@ -148,6 +146,15 @@ export default {
       }
     }
   },
+  computed:{
+    loginBgStyle(){
+      return{
+        width:"100vw",
+        height:"100vh",
+        backgroundImage:`url(${require('@/assets/loginPageBg.jpg')})`
+      }
+    }
+  },
   methods: {
     changeStatus() {
       this.isLogin = !this.isLogin;
@@ -198,11 +205,10 @@ export default {
 body {
   margin: 0;
 }
-.loginWrapper, .registerWrapper{
-  width:80%;
-  margin:auto;
+.loginWrapper, .registerWrapper {
+  width: 80%;
+  margin: auto;
 }
-
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
