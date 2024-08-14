@@ -1,8 +1,11 @@
 <template>
   <div :style="loginBgStyle">
     <div id="slideFix">
-      <el-tooltip class="item" effect="dark" content="访问作者" placement="left">
+      <el-tooltip class="item" effect="dark" content="访问作者github" placement="left">
         <span class="iconfont icon-github" @click="toMyGitHub"></span>
+      </el-tooltip>
+      <el-tooltip class="item" effect="dark" content="访问作者csdn" placement="left">
+        <span class="iconfont icon-csdn" @click="toMyCSDN"></span>
       </el-tooltip>
     </div>
     <el-row
@@ -203,6 +206,9 @@ export default {
     },
     toMyGitHub(){
       window.open("https://github.com/zhang8330");
+    },
+    toMyCSDN(){
+      window.open("https://blog.csdn.net/weixin_43539655?spm=1000.2115.3001.5343");
     }
 
   }
@@ -229,15 +235,22 @@ export default {
 span.icon-github{
   font-size:32px;
 }
+span.icon-csdn{
+  font-size:32px;
+  color:rgb(221,23,0);
+}
 .iconfont{
   cursor: pointer;
 }
 #slideFix{
   position:fixed;
+  display: flex;
+  flex-direction: column;
+  gap:5px;
   top:40%;
   right:0;
   width:40px;
-  height:200px;
+  padding: 5px;
   text-align: center;
   background-color: rgba(230, 232, 238, 0.5);
   z-index: 10;
