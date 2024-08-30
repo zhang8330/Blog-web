@@ -235,6 +235,10 @@ export default {
             type: "effectScatter",
             data: [[121, 31]],
             coordinateSystem: "bmap"
+          },{
+            type: "effectScatter",
+            data: [[11, 31]],
+            coordinateSystem: "bmap"
           },
         ],
       },
@@ -288,9 +292,10 @@ export default {
           .getComponent("bmap")
           .getBMap(); // 获取百度地图实例
       bmap.setMapStyleV2({
-        styleId: "0cee61531dd349b8df0cd84dbfb92b1b"
+        styleId: ""
       });
     });
+    this.getVisitorList();
   },
   methods: {
     handleUserCurrentChange(page) {
@@ -299,6 +304,7 @@ export default {
     },
     getVisitorList() {
       webSiteService.getWebSiteData(this.searchParams).then((rs) => {
+        console.log("DBA.VUE getVisitorList",rs);
         this.totalNum = rs.data.data.totalNum;
         this.visitorDataCharts = this.$echarts.init(this.$refs.visitorData);
         let userLocationData = [];

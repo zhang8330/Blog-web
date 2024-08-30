@@ -86,7 +86,7 @@ export default {
         cb(new Error("请输入密码"));
       } else {
         if (vm.registerForm.confirmPassword) {
-          vm.$refs.registerForm.validateFiled("confirmPassword");
+          vm.$refs.registerForm.validateField("confirmPassword");
         }
         cb();
       }
