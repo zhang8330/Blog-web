@@ -75,6 +75,7 @@
 <script>
 import defaultConfig from "@/config/configDefault";
 import userService from "@/service/userService";
+import webSiteService from "@/service/webSiteService";
 
 export default {
   name: "LoginPage",
@@ -112,7 +113,14 @@ export default {
         userName: "",
         passWord: "",
         confirmPassword: "",
-        myAvatar: ""
+        myAvatar: "",
+      },
+      positionForm: {
+        //地理位置
+        visitTime:Date,
+        location:[],
+        province:"",
+        city:""
       },
       rules: {
         userName: [
@@ -182,15 +190,18 @@ export default {
               }
             })
           } else {
-            userService.registerUser(this.registerForm).then(rs => {
-              if (rs.data.status === 200) {
-                sessionStorage.setItem("Authorization", rs.headers.authorization);
-                this.$message.success("注册成功："+rs.data.message);
-                //window.location.replace(`${defaultConfig.hostname}/index.html`);
-              } else {
-                this.$message.error("注册失败："+rs.data.message);
-              }
+            webSiteService.setVisitorData().then(rs => {
+              console.log(rs);
             })
+            // userService.registerUser(this.registerForm).then(rs => {
+            //   if (rs.data.status === 200) {
+            //     sessionStorage.setItem("Authorization", rs.headers.authorization);
+            //     this.$message.success("注册成功："+rs.data.message);
+            //     //window.location.replace(`${defaultConfig.hostname}/index.html`);
+            //   } else {
+            //     this.$message.error("注册失败："+rs.data.message);
+            //   }
+            // })
           }
         } else {
           this.$message.error("验证失败");

@@ -292,9 +292,10 @@ export default {
           .getComponent("bmap")
           .getBMap(); // 获取百度地图实例
       bmap.setMapStyleV2({
-        styleId: ""
+        styleId: "0cee61531dd349b8df0cd84dbfb92b1b"
       });
     });
+
     this.getVisitorList();
   },
   methods: {
